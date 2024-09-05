@@ -5,23 +5,23 @@
 //
 
 // Right led pins
-#define R_LED_1 6
-#define R_LED_2 7
-#define R_LED_3 8
-#define R_LED_4 9
-#define R_LED_5 10
+#define R_LED_1 7
+#define R_LED_2 8
+#define R_LED_3 9
+#define R_LED_4 10
+#define R_LED_5 11
 
 // Left led pins    
-#define L_LED_1 5
-#define L_LED_2 4
-#define L_LED_3 3
-#define L_LED_4 2
-#define L_LED_5 1
+#define L_LED_1 6
+#define L_LED_2 5
+#define L_LED_3 4
+#define L_LED_4 3
+#define L_LED_5 2
 
 // Button pins
-#define R_BUTTON 11 // Right indicator button
-#define L_BUTTON 13 // Left indicator button
-#define H_BUTTON 12 // Hazard lights button
+#define R_BUTTON A3 // Right indicator button
+#define L_BUTTON A1 // Left indicator button
+#define H_BUTTON A2 // Hazard lights button
 
 //
 // Variables
@@ -34,6 +34,9 @@ bool right_button_last_state = LOW;
 // Left Indicator
 bool left_led_state = false;
 bool left_button_last_state = LOW;
+
+// Hazard Button
+bool hazard_button_last_state = LOW;
 
 // millis
 long last_millis_right = 0;
@@ -179,6 +182,7 @@ int left_step = 0;
         // Reading button states
         int right_button_state = digitalRead(R_BUTTON);
         int left_button_state = digitalRead(L_BUTTON);
+        int hazard_button_state = digitalRead(H_BUTTON);
 
         // Printing button state on serial monitor
         Serial.print("R_BUTTON: ");  Serial.println(right_button_state);  
@@ -200,6 +204,15 @@ int left_step = 0;
         }
         left_button_last_state = left_button_state;
 
+        // if hazard button pressed
+        if(hazard_button_state == HIGH && hazard_button_last_state == LOW)
+        {
+            left_led_state = !left_led_state;
+            right_led_state = !right_led_state;
+            delay(50);
+        }
+        hazard_button_last_state = hazard_button_state;
+
         // Right Indicator
         if(right_led_state) {
             right_indicator();
@@ -215,4 +228,16 @@ int left_step = 0;
         else {
             left_indicator_off();
         }
+
+        // Hazard Lights
+        if (left_led_state && right_led_state)
+        {
+            right_indicator();
+            left_indicator();
+        }
+        else {
+            right_indicator_off();
+            left_indicator_off();
+        }
+        
     }
