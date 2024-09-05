@@ -24,30 +24,33 @@
 #define H_BUTTON 12 // Hazard lights button
 
 //
-// Variable
+// Variables
 //
 
 // Right Indicator
-bool right_led_state = false; // right led state initially set to 'false'
-bool right_button_last_state = LOW; // right button last state initially set to 'LOW'
+bool right_led_state = false;
+bool right_button_last_state = LOW;
 
 // Left Indicator
-bool left_led_state = false; // left led state initially set to 'false'
-bool left_button_last_state = LOW; // left button last state initially set to 'LOW'
+bool left_led_state = false;
+bool left_button_last_state = LOW;
 
 // millis
-long last_millis_right = 0; // last millis value for right indicator initially set to '0'
-long last_millis_left = 0; // last millis value for left indicator initially set to '0'
+long last_millis_right = 0;
+long last_millis_left = 0;
 
 // Interval
-long interval = 35; // interval is set to '35'
+long interval = 35;
 
 // current steps 
-int right_step = 0; // right step initially set to '0'
-int left_step = 0; // left step initially set to '0'
+int right_step = 0;
+int left_step = 0;
 
-    
+//
+// Functions
+//
 
+// Right Indicator function
     void right_indicator() {
         long current_millis = millis();
 
@@ -86,6 +89,7 @@ int left_step = 0; // left step initially set to '0'
         }
     }
 
+// Right Indicator off function
     void right_indicator_off() {
         digitalWrite(R_LED_1, LOW);
         digitalWrite(R_LED_2, LOW);
@@ -94,6 +98,7 @@ int left_step = 0; // left step initially set to '0'
         digitalWrite(R_LED_5, LOW);
     }
 
+// Left Indicator function
     void left_indicator() {
         long current_millis = millis();
 
@@ -133,6 +138,7 @@ int left_step = 0; // left step initially set to '0'
         }
     }
 
+// Ledt Indicator off function
     void left_indicator_off() {
         digitalWrite(L_LED_1, LOW);
         digitalWrite(L_LED_2, LOW);
@@ -141,34 +147,44 @@ int left_step = 0; // left step initially set to '0'
         digitalWrite(L_LED_5, LOW);
     }
 
+// Setup function
     void setup() {
         
+        // Serial Monitor
         Serial.begin(9600);
 
+        // pinMode right led's
         pinMode(R_LED_1, OUTPUT);
         pinMode(R_LED_2, OUTPUT);
         pinMode(R_LED_3, OUTPUT);
         pinMode(R_LED_4, OUTPUT);
         pinMode(R_LED_5, OUTPUT);
-
+        
+        // pinMode left led's
         pinMode(L_LED_1, OUTPUT);
         pinMode(L_LED_2, OUTPUT);
         pinMode(L_LED_3, OUTPUT);
         pinMode(L_LED_4, OUTPUT);
         pinMode(L_LED_5, OUTPUT);
 
+        // pinMode buttons
         pinMode(R_BUTTON, INPUT);
         pinMode(L_BUTTON, INPUT);
-        pinMode(P_BUTTON, INPUT);
+        pinMode(H_BUTTON, INPUT);
     }
 
+// Loop Function
     void loop() {
+
+        // Reading button states
         int right_button_state = digitalRead(R_BUTTON);
         int left_button_state = digitalRead(L_BUTTON);
 
+        // Printing button state on serial monitor
         Serial.print("R_BUTTON: ");  Serial.println(right_button_state);  
         Serial.print("L_BUTTON: ");  Serial.println(left_button_state);
 
+        // if right button pressed
         if(right_button_state == HIGH && right_button_last_state == LOW)
         {
             right_led_state = !right_led_state;
@@ -176,6 +192,7 @@ int left_step = 0; // left step initially set to '0'
         }
         right_button_last_state = right_button_state;
 
+        // if left button pressed
         if(left_button_state == HIGH && left_button_last_state == LOW)
         {
             left_led_state = !left_led_state;
@@ -183,6 +200,7 @@ int left_step = 0; // left step initially set to '0'
         }
         left_button_last_state = left_button_state;
 
+        // Right Indicator
         if(right_led_state) {
             right_indicator();
         }
@@ -190,6 +208,7 @@ int left_step = 0; // left step initially set to '0'
             right_indicator_off();
         }
 
+        // Left Indicator
         if(left_led_state) {
             left_indicator();
         }
