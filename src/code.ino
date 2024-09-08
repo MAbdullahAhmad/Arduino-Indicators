@@ -62,7 +62,7 @@ long last_millis_right = 0;
 long last_millis_left = 0;
 
 // Interval
-long interval = 35;
+long interval = 50;
 
 // current steps 
 int right_step = 0;
@@ -89,6 +89,9 @@ void power_blink() {
         digitalWrite(L_LED_4, HIGH);
         digitalWrite(L_LED_5, HIGH);
 
+        digitalWrite(SEV_SEG_A, HIGH);
+        digitalWrite(SEV_SEG_C, HIGH);
+
         delay(800);
 
         digitalWrite(R_LED_1, LOW);
@@ -102,6 +105,9 @@ void power_blink() {
         digitalWrite(L_LED_3, LOW);
         digitalWrite(L_LED_4, LOW);
         digitalWrite(L_LED_5, LOW);
+
+        digitalWrite(SEV_SEG_A, LOW);
+        digitalWrite(SEV_SEG_C, LOW);
 
         delay(800);
     }
