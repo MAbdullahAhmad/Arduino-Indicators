@@ -35,32 +35,6 @@ void setup(){
     pinMode(BUTTON_HAZARD, INPUT_PULLUP);
 }
 
-// void blink_leds(){
-//     digitalWrite(LED_R1, HIGH);
-//     digitalWrite(LED_R2, HIGH);
-//     digitalWrite(LED_R3, HIGH);
-//     digitalWrite(LED_R4, HIGH);
-//     digitalWrite(LED_R5, HIGH);
-//     digitalWrite(LED_L1, HIGH);
-//     digitalWrite(LED_L2, HIGH);
-//     digitalWrite(LED_L3, HIGH);
-//     digitalWrite(LED_L4, HIGH);
-//     digitalWrite(LED_L5, HIGH);
-//     delay(1000);
-
-//     digitalWrite(LED_R1, LOW);
-//     digitalWrite(LED_R2, LOW);
-//     digitalWrite(LED_R3, LOW);
-//     digitalWrite(LED_R4, LOW);
-//     digitalWrite(LED_R5, LOW);
-//     digitalWrite(LED_L1, LOW);
-//     digitalWrite(LED_L2, LOW);
-//     digitalWrite(LED_L3, LOW);
-//     digitalWrite(LED_L4, LOW);
-//     digitalWrite(LED_L5, LOW);
-//     delay(1000);
-// }
-
 void loop(){
     if(digitalRead(BUTTON_LEFT)){
         left_leds_transition();
