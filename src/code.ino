@@ -75,7 +75,7 @@ int left_step = 0;
 void power_blink() {
     long start_time = millis();
 
-    while(millis() - start_time < 2000)
+    while(millis() - start_time < 700)
     {
         digitalWrite(R_LED_1, HIGH);
         digitalWrite(R_LED_2, HIGH);
@@ -92,7 +92,7 @@ void power_blink() {
         digitalWrite(SEV_SEG_A, HIGH);
         digitalWrite(SEV_SEG_C, HIGH);
 
-        delay(800);
+        delay(300);
 
         digitalWrite(R_LED_1, LOW);
         digitalWrite(R_LED_2, LOW);
@@ -109,7 +109,7 @@ void power_blink() {
         digitalWrite(SEV_SEG_A, LOW);
         digitalWrite(SEV_SEG_C, LOW);
 
-        delay(800);
+        delay(300);
     }
 }
 
